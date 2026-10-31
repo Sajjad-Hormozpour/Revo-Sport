@@ -1,0 +1,327 @@
+/* ==========================================================================
+   Student chrome — bottom navigation and header actions
+   Scoped to routes under #/student so coach screens stay untouched.
+   ========================================================================== */
+
+/* ---------- hide the subscription slot in the student bottom bar ---------- */
+.revo-student-route nav .revo-nav > button[data-revo-sub="true"],
+.revo-student-route nav .revo-nav > button:has(svg.lucide-crown),
+.revo-student-route nav .revo-nav > button:has(svg[class*="lucide-crown"]),
+.revo-student-route [class*="bottom"] button:has(svg.lucide-crown),
+.revo-student-route [class*="bottom"] button:has(svg[class*="lucide-crown"]) {
+  display: none !important;
+}
+
+/* Hide the light/dark theme button in the student header (theme lives in Settings). */
+.revo-student-route header button:has(svg.lucide-sun),
+.revo-student-route header button:has(svg.lucide-moon),
+.revo-student-route header button:has(svg[class*="lucide-sun"]),
+.revo-student-route header button:has(svg[class*="lucide-moon"]) {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Bottom navigation
+   ========================================================================== */
+
+.revo-student-route nav {
+  position: relative;
+  z-index: 20;
+  padding-inline: 12px;
+  padding-top: 8px;
+}
+
+.revo-student-route nav .revo-nav {
+  position: relative;
+  display: grid !important;
+  grid-template-columns: repeat(var(--revo-nav-count, 5), minmax(0, 1fr)) !important;
+  align-items: stretch;
+  gap: 2px;
+  min-height: 64px;
+  padding: 6px !important;
+  overflow: hidden;
+  border-radius: 24px !important;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  background:
+    linear-gradient(180deg, rgba(40, 42, 32, 0.92), rgba(18, 19, 16, 0.96)) !important;
+  box-shadow:
+    0 24px 50px -24px rgba(0, 0, 0, 0.85),
+    0 -1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 1px 0 rgba(255, 255, 255, 0.12) inset !important;
+  backdrop-filter: blur(26px) saturate(1.4);
+  -webkit-backdrop-filter: blur(26px) saturate(1.4);
+  isolation: isolate;
+}
+
+/* gold hairline along the top edge */
+.revo-student-route nav .revo-nav::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 22%;
+  left: 22%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(233, 228, 0, 0.6), transparent);
+  pointer-events: none;
+}
+
+/* The original React indicator assumed six slots. Hide it; our pill is measured. */
+.revo-student-route nav .revo-nav > span[aria-hidden]:not(.revo-nav-pill) {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.revo-nav-pill {
+  position: absolute;
+  z-index: 0;
+  top: 6px;
+  left: 6px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #f5ff3d 0%, #e9e400 55%, #cec900 100%);
+  box-shadow:
+    0 12px 26px -10px rgba(233, 228, 0, 0.75),
+    0 0 0 1px rgba(255, 255, 255, 0.18) inset,
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    left 0.26s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.26s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.2s ease,
+    opacity 0.16s ease;
+}
+
+/* ---------- items ---------- */
+.revo-student-route nav .revo-nav > button {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 6px 2px 5px !important;
+  border: 0;
+  border-radius: 18px;
+  background: transparent;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* hover halo behind each item */
+.revo-student-route nav .revo-nav > button::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 2px;
+  border-radius: 16px;
+  background: radial-gradient(64% 70% at 50% 26%, rgba(233, 228, 0, 0.26), rgba(233, 228, 0, 0.05) 62%, transparent 78%);
+  opacity: 0;
+  transform: scale(0.86);
+  transition: opacity 0.26s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.revo-student-route nav .revo-nav > button > span:first-child {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 11px;
+  transition:
+    transform 0.26s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.24s ease,
+    box-shadow 0.26s ease;
+}
+
+.revo-student-route nav .revo-nav > button > span:last-child {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.24s ease, transform 0.26s ease;
+}
+
+.revo-student-route nav .revo-nav svg {
+  transition:
+    color 0.24s ease,
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.26s ease;
+}
+
+/* active item keeps its black glyph on the gold pill */
+.revo-student-route nav .revo-nav > button[aria-current="page"] > span:first-child {
+  background: transparent !important;
+  box-shadow: none;
+}
+.revo-student-route nav .revo-nav > button[aria-current="page"] > span:last-child {
+  color: #0a0b0c !important;
+}
+
+/* ---------- hover (pointer devices) ---------- */
+@media (hover: hover) and (pointer: fine) {
+  .revo-student-route nav .revo-nav > button:hover {
+    transform: translateY(-2px);
+  }
+
+  .revo-student-route nav .revo-nav > button:hover::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .revo-student-route nav .revo-nav > button:hover > span:first-child {
+    transform: translateY(-2px) scale(1.08);
+  }
+
+  .revo-student-route nav .revo-nav > button:hover svg {
+    color: #e9e400;
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 8px rgba(233, 228, 0, 0.55));
+  }
+
+  .revo-student-route nav .revo-nav > button:hover > span:last-child {
+    color: #fff;
+    transform: translateY(-1px);
+  }
+
+  /* active item: keep the glyph dark and lift it slightly */
+  .revo-student-route nav .revo-nav > button[aria-current="page"]:hover svg {
+    color: #0a0b0c;
+    filter: none;
+  }
+  .revo-student-route nav .revo-nav > button[aria-current="page"]:hover > span:last-child {
+    color: #0a0b0c !important;
+  }
+}
+
+.revo-student-route nav .revo-nav > button:active {
+  transform: scale(0.94);
+}
+
+.revo-student-route nav .revo-nav > button:focus-visible {
+  outline: 2px solid rgba(233, 228, 0, 0.8);
+  outline-offset: -2px;
+}
+
+/* unread badge on chat */
+.revo-student-route nav .revo-nav > button > span:first-child > span {
+  box-shadow: 0 0 0 3px rgba(10, 11, 12, 0.35);
+}
+
+/* ==========================================================================
+   Header subscription action
+   ========================================================================== */
+
+.revo-student-sub {
+  position: relative;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  flex: none;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  background: var(--color-card, #151613);
+  color: #e9e400;
+  cursor: pointer;
+  isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.24s ease,
+    background 0.24s ease,
+    box-shadow 0.24s ease;
+}
+
+.revo-student-sub-halo {
+  position: absolute;
+  z-index: -1;
+  inset: -6px;
+  border-radius: inherit;
+  background: radial-gradient(circle at 50% 55%, rgba(233, 228, 0, 0.5), transparent 70%);
+  opacity: 0;
+  filter: blur(8px);
+  transition: opacity 0.26s ease;
+  pointer-events: none;
+}
+
+.revo-student-sub svg {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.24s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .revo-student-sub:hover {
+    transform: translateY(-1px);
+    border-color: rgba(233, 228, 0, 0.6);
+    background: rgba(233, 228, 0, 0.14);
+    box-shadow: 0 10px 22px -12px rgba(233, 228, 0, 0.8);
+  }
+  .revo-student-sub:hover .revo-student-sub-halo { opacity: 1; }
+  .revo-student-sub:hover svg {
+    transform: scale(1.1) rotate(-4deg);
+    filter: drop-shadow(0 0 6px rgba(233, 228, 0, 0.6));
+  }
+}
+
+.revo-student-sub:active { transform: scale(0.92); }
+
+.revo-student-sub[aria-current="page"] {
+  border-color: rgba(255, 255, 255, 0.25);
+  background: linear-gradient(180deg, #f5ff3d, #d9d200);
+  color: #0a0b0c;
+  box-shadow: 0 10px 22px -12px rgba(233, 228, 0, 0.9);
+}
+
+.revo-student-sub:focus-visible {
+  outline: 2px solid rgba(233, 228, 0, 0.8);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Responsive tuning
+   ========================================================================== */
+
+@media (max-width: 360px) {
+  .revo-student-route nav { padding-inline: 8px; }
+  .revo-student-route nav .revo-nav { min-height: 60px; gap: 0; }
+  .revo-student-route nav .revo-nav > button { gap: 2px; padding: 5px 1px 4px !important; }
+  .revo-student-route nav .revo-nav > button > span:first-child { width: 30px; height: 30px; }
+  .revo-student-route nav .revo-nav > button > span:last-child { font-size: 8.5px !important; }
+}
+
+@media (orientation: landscape) and (max-height: 520px) {
+  .revo-student-route nav { padding-top: 4px; padding-bottom: 4px; }
+  .revo-student-route nav .revo-nav { min-height: 54px; }
+  .revo-student-route nav .revo-nav > button > span:last-child { display: none; }
+  .revo-student-route nav .revo-nav > button > span:first-child { width: 34px; height: 34px; }
+}
+
+@media (min-width: 640px) {
+  .revo-student-route nav .revo-nav { max-width: 520px; margin-inline: auto; }
+}
+
+/* Light theme keeps contrast when the student switches theme from Settings. */
+html.light.revo-student-route nav .revo-nav {
+  border-color: rgba(17, 19, 10, 0.1);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(246, 247, 242, 0.96)) !important;
+  box-shadow: 0 20px 40px -24px rgba(17, 19, 10, 0.3), 0 1px 0 rgba(255, 255, 255, 0.9) inset !important;
+}
+html.light.revo-student-route nav .revo-nav > button:hover > span:last-child { color: #15170f; }
+html.light.revo-student-route .revo-student-sub { border-color: rgba(17, 19, 10, 0.1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .revo-nav-pill,
+  .revo-student-route nav .revo-nav > button,
+  .revo-student-route nav .revo-nav > button::before,
+  .revo-student-route nav .revo-nav > button > span,
+  .revo-student-route nav .revo-nav svg,
+  .revo-student-sub,
+  .revo-student-sub svg,
+  .revo-student-sub-halo {
+    transition: none !important;
+  }
+}

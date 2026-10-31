@@ -1,0 +1,204 @@
+/* The upstream app renders coach dialogs inside animated screen containers. */
+[data-revo-coach-dialog-ancestor] {
+  animation: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  contain: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+  perspective: none !important;
+  transform: none !important;
+  will-change: auto !important;
+}
+
+[data-revo-coach-screen-settled] {
+  animation: none !important;
+}
+
+[data-revo-coach-dialog] {
+  position: fixed !important;
+  inset: auto !important;
+  top: var(--revo-dialog-top, 0px) !important;
+  left: var(--revo-dialog-left, 0px) !important;
+  z-index: 200 !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  width: var(--revo-dialog-width, 100vw) !important;
+  height: var(--revo-dialog-height, 100vh) !important;
+  align-items: flex-end !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  overscroll-behavior: contain;
+  padding: max(10px, env(safe-area-inset-top)) 12px max(10px, env(safe-area-inset-bottom)) !important;
+  background: rgba(0, 0, 0, 0.72) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  animation: revo-coach-overlay-in 140ms ease-out both !important;
+}
+
+[data-revo-coach-panel] {
+  --revo-panel-padding: 18px;
+  position: relative !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 0;
+  max-width: min(100%, 32rem) !important;
+  max-height: 100% !important;
+  flex: 0 1 auto;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: auto;
+  scroll-padding-block: 72px 20px;
+  margin: 0 !important;
+  padding: 0 var(--revo-panel-padding) max(20px, env(safe-area-inset-bottom)) !important;
+  border: 1px solid var(--color-line, rgba(255, 255, 255, 0.1));
+  border-radius: 24px !important;
+  background: var(--color-card, #151613) !important;
+  box-shadow: 0 20px 56px -20px rgba(0, 0, 0, 0.8) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  animation: revo-coach-panel-in 190ms cubic-bezier(0.22, 1, 0.36, 1) both !important;
+}
+
+[data-revo-coach-panel][class~="sm:max-w-3xl"] {
+  max-width: min(100%, 48rem) !important;
+}
+
+[data-revo-coach-dialog-header] {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 5 !important;
+  box-sizing: border-box;
+  min-height: 66px;
+  gap: 12px;
+  margin: 0 calc(-1 * var(--revo-panel-padding)) 18px !important;
+  padding: 14px var(--revo-panel-padding) !important;
+  border-bottom: 1px solid var(--color-line, rgba(255, 255, 255, 0.08));
+  background: var(--color-card, #151613);
+}
+
+[data-revo-coach-dialog-header] h3 {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  line-height: 1.6;
+}
+
+[data-revo-coach-dialog-header] button {
+  flex-shrink: 0;
+}
+
+[data-revo-coach-panel] .grid > * {
+  min-width: 0;
+}
+
+[data-revo-coach-panel] :is(input, select, textarea) {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+}
+
+[data-revo-coach-panel] :is(img, video, iframe) {
+  max-width: 100%;
+}
+
+[data-revo-coach-panel]::-webkit-scrollbar {
+  width: 6px;
+}
+
+[data-revo-coach-panel]::-webkit-scrollbar-thumb {
+  border-radius: 99px;
+  background: rgba(233, 228, 0, 0.3);
+}
+
+/* Keep validation/toast messages above the dialog backdrop. */
+html[data-revo-coach-dialog-open] .revo-remote-root > .fixed[class*="bottom-"] {
+  z-index: 210 !important;
+}
+
+@media (min-width: 640px) {
+  [data-revo-coach-dialog] {
+    align-items: center !important;
+    padding: 24px !important;
+  }
+
+  [data-revo-coach-panel] {
+    --revo-panel-padding: 24px;
+    padding-bottom: 24px !important;
+    border-radius: 26px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  [data-revo-coach-panel] {
+    --revo-panel-padding: 14px;
+  }
+
+  [data-revo-coach-panel] .grid.grid-cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 639px) {
+  [data-revo-coach-panel] :is(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+    font-size: 16px;
+  }
+}
+
+html.light [data-revo-coach-panel] {
+  box-shadow: 0 20px 56px -20px rgba(17, 19, 10, 0.28) !important;
+}
+
+/* Shorter, compositor-friendly movement and native scrolling in the coach workspace. */
+html.revo-coach-route .revo-remote-root .coach-scroll {
+  scroll-behavior: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+html.revo-coach-route .revo-remote-root .coach-scroll .press {
+  will-change: auto;
+  transition-duration: 160ms;
+}
+
+html.revo-coach-route .revo-remote-root .coach-scroll .screen-in {
+  animation: revo-coach-screen-in 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html.revo-coach-route .revo-remote-root .coach-scroll [data-reveal] {
+  filter: none;
+  will-change: auto;
+  transition-duration: 280ms;
+}
+
+html.revo-coach-route .revo-remote-root .coach-scroll [data-reveal].is-revealed {
+  transform: none;
+}
+
+@keyframes revo-coach-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes revo-coach-panel-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes revo-coach-screen-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-revo-coach-dialog],
+  [data-revo-coach-panel],
+  html.revo-coach-route .revo-remote-root .coach-scroll .screen-in {
+    animation: none !important;
+  }
+
+  html.revo-coach-route .revo-remote-root .coach-scroll .press,
+  html.revo-coach-route .revo-remote-root .coach-scroll [data-reveal] {
+    transition: none !important;
+  }
+}
