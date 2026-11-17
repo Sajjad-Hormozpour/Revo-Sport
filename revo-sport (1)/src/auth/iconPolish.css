@@ -1,0 +1,295 @@
+/* Revo icon language. The original Lucide glyphs and click handlers stay intact. */
+html:is(.revo-student-route, .revo-coach-route) .revo-remote-root svg.lucide {
+  flex-shrink: 0;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  shape-rendering: geometricPrecision;
+  transition: color 220ms ease, transform 260ms cubic-bezier(0.22, 1, 0.36, 1), filter 220ms ease;
+}
+
+html:is(.revo-student-route, .revo-coach-route) .revo-remote-root button > svg.lucide {
+  stroke-width: 2;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html:is(.revo-student-route, .revo-coach-route) .revo-remote-root button:not(:disabled):hover > svg.lucide {
+    transform: translateY(-1px) scale(1.06);
+  }
+}
+
+html:is(.revo-student-route, .revo-coach-route) .revo-remote-root button:not(:disabled):active > svg.lucide {
+  transform: scale(0.92);
+}
+
+/* Branded icon wells throughout both dashboards keep the yellow accent crisp. */
+html:is(.revo-student-route, .revo-coach-route) .revo-remote-root
+  :is(.glass-subtle, [class*="bg-[#e9e400]/15"]):has(> svg.lucide) {
+  border-color: rgba(233, 228, 0, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.09);
+}
+
+/* Athlete navigation: one consistent, precision-sized surface per glyph. */
+html.revo-student-route .revo-remote-root nav .revo-nav > button > span:first-child {
+  box-sizing: border-box;
+  width: 36px;
+  height: 36px;
+  padding: 0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.035)) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.09), 0 7px 18px -13px rgba(0, 0, 0, 0.9);
+}
+
+html.revo-student-route .revo-remote-root nav .revo-nav > button svg.lucide {
+  width: 21px;
+  height: 21px;
+  color: color-mix(in srgb, var(--color-ink) 76%, var(--color-mute));
+  stroke-width: 2.05;
+  opacity: 0.94;
+  filter: none;
+}
+
+html.revo-student-route .revo-remote-root nav .revo-nav > button svg.lucide-home {
+  width: 22px;
+  height: 22px;
+  color: #e9e400;
+}
+
+html.revo-student-route .revo-remote-root nav .revo-nav > button[aria-current="page"] > span:first-child {
+  border-color: rgba(0, 0, 0, 0.12);
+  background: rgba(0, 0, 0, 0.09) !important;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+html.revo-student-route .revo-remote-root nav .revo-nav > button[aria-current="page"] svg.lucide {
+  color: #11130e !important;
+  stroke-width: 2.35;
+  opacity: 1;
+  filter: none !important;
+}
+
+html.revo-student-route .revo-remote-root nav .revo-nav > button > span:last-child {
+  font-size: 9.5px !important;
+  letter-spacing: 0;
+  line-height: 1.2;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html.revo-student-route .revo-remote-root nav .revo-nav > button:not([aria-current="page"]):hover > span:first-child {
+    border-color: rgba(233, 228, 0, 0.43);
+    background: linear-gradient(150deg, rgba(233, 228, 0, 0.18), rgba(233, 228, 0, 0.04)) !important;
+    box-shadow: 0 10px 22px -13px rgba(233, 228, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.13);
+    transform: translateY(-2px) scale(1.04);
+  }
+
+  html.revo-student-route .revo-remote-root nav .revo-nav > button:not([aria-current="page"]):hover svg.lucide {
+    color: #e9e400;
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 5px rgba(233, 228, 0, 0.36));
+  }
+
+  html.revo-student-route .revo-remote-root nav .revo-nav > button[aria-current="page"]:hover > span:first-child {
+    border-color: rgba(0, 0, 0, 0.15);
+    background: rgba(0, 0, 0, 0.09) !important;
+  }
+}
+
+/* Header bell and subscription share one visual weight and hit area. */
+html.revo-student-route .revo-remote-root header button:has(> svg.lucide-bell),
+html.revo-student-route .revo-remote-root header .revo-student-sub {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 12px;
+  background: linear-gradient(145deg, var(--color-card2), var(--color-card));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+html.revo-student-route .revo-remote-root header button > svg.lucide-bell,
+html.revo-student-route .revo-remote-root header .revo-student-sub > svg.lucide-crown {
+  width: 19px;
+  height: 19px;
+  color: #e9e400;
+  stroke-width: 2.1;
+}
+
+html.revo-student-route .revo-remote-root header button[aria-label="بازگشت"] > svg.lucide {
+  width: 19px;
+  height: 19px;
+  stroke-width: 2.2;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html.revo-student-route .revo-remote-root header button:has(> svg.lucide-bell):hover,
+  html.revo-student-route .revo-remote-root header .revo-student-sub:hover {
+    border-color: rgba(233, 228, 0, 0.42);
+    background: rgba(233, 228, 0, 0.12);
+    box-shadow: 0 10px 24px -16px rgba(233, 228, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.09);
+  }
+}
+
+/* Coach navigation uses the same drawn style, scaled for its denser sidebar. */
+html.revo-coach-route .revo-remote-root aside nav button > svg.lucide {
+  box-sizing: content-box;
+  width: 18px;
+  height: 18px;
+  padding: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.025));
+  color: inherit;
+  stroke-width: 2.05;
+  transition: color 220ms ease, background 220ms ease, border-color 220ms ease,
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html.revo-coach-route .revo-remote-root aside nav button[aria-current="page"] > svg.lucide {
+  border-color: rgba(0, 0, 0, 0.14);
+  background: rgba(0, 0, 0, 0.1);
+  color: #11130e;
+  stroke-width: 2.3;
+}
+
+html.revo-coach-route .revo-remote-root header button[aria-label="منو"],
+html.revo-coach-route .revo-remote-root button[aria-label="بازگشت به بالای صفحه"] {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(145deg, var(--color-card2), var(--color-card));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+html.revo-coach-route .revo-remote-root aside nav button:focus-visible,
+html.revo-coach-route .revo-remote-root header button[aria-label="منو"]:focus-visible {
+  outline: 2px solid rgba(233, 228, 0, 0.8);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html.revo-coach-route .revo-remote-root aside nav button:not([aria-current="page"]):hover > svg.lucide {
+    border-color: rgba(233, 228, 0, 0.35);
+    background: rgba(233, 228, 0, 0.12);
+    color: #e9e400;
+    transform: translateY(-1px);
+  }
+
+  html.revo-coach-route .revo-remote-root aside nav button[aria-current="page"]:hover > svg.lucide {
+    color: #11130e;
+  }
+
+  html.revo-coach-route .revo-remote-root header button[aria-label="منو"]:hover,
+  html.revo-coach-route .revo-remote-root button[aria-label="بازگشت به بالای صفحه"]:hover {
+    border-color: rgba(233, 228, 0, 0.46);
+    box-shadow: 0 8px 20px -13px rgba(233, 228, 0, 0.7);
+  }
+}
+
+/* Other clickable product icons get a restrained, consistent response. */
+@media (hover: hover) and (pointer: fine) {
+  html.revo-student-route .revo-remote-root button:not(:disabled):not(.revo-student-sub):hover > svg.lucide,
+  html.revo-coach-route .revo-remote-root button:not(:disabled):hover > svg.lucide {
+    filter: drop-shadow(0 2px 5px rgba(233, 228, 0, 0.2));
+  }
+}
+
+/* Local authentication also shares the same stroke treatment. */
+.neo-auth :is(.field, .spec-icon, .format-icon, .photo-badge, .coach-points, .btn) svg {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1), color 200ms ease, filter 200ms ease;
+}
+
+.neo-auth .field:focus-within > svg {
+  color: #e9e400;
+  filter: drop-shadow(0 0 5px rgba(233, 228, 0, 0.32));
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .neo-auth .field:hover > svg {
+    color: #e9e400;
+    filter: drop-shadow(0 0 5px rgba(233, 228, 0, 0.32));
+  }
+
+  .neo-auth .spec-card:hover .spec-icon svg,
+  .neo-auth .format-card:hover .format-icon svg,
+  .neo-auth .btn:hover svg {
+    transform: translateY(-1px) scale(1.07);
+  }
+}
+
+/* Light mode is a genuine theme, not a pale variant of the dark icon colors. */
+html.light.revo-student-route .revo-remote-root nav .revo-nav > button:not([aria-current="page"]) > span:first-child,
+html.light.revo-coach-route .revo-remote-root aside nav button:not([aria-current="page"]) > svg.lucide {
+  border-color: rgba(17, 19, 10, 0.1);
+  background: linear-gradient(145deg, rgba(17, 19, 10, 0.075), rgba(17, 19, 10, 0.02)) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+html.light.revo-student-route .revo-remote-root nav .revo-nav > button:not([aria-current="page"]) svg.lucide {
+  color: #4d5142;
+}
+
+html.light.revo-student-route .revo-remote-root nav .revo-nav > button:not([aria-current="page"]) svg.lucide-home,
+html.light.revo-student-route .revo-remote-root header button > svg.lucide-bell,
+html.light.revo-student-route .revo-remote-root header .revo-student-sub > svg.lucide-crown {
+  color: #777300;
+}
+
+html.light.revo-student-route .revo-remote-root header button:has(> svg.lucide-bell),
+html.light.revo-student-route .revo-remote-root header .revo-student-sub {
+  border-color: rgba(17, 19, 10, 0.09);
+  background: linear-gradient(145deg, #fff, #f4f5ed);
+}
+
+html.revo-student-route .revo-remote-root header .revo-student-sub[aria-current="page"] {
+  background: linear-gradient(180deg, #f5ff3d, #d9d200);
+}
+
+html.revo-student-route .revo-remote-root header .revo-student-sub[aria-current="page"] > svg.lucide-crown {
+  color: #11130e !important;
+  filter: none;
+}
+
+html.light.revo-coach-route .revo-remote-root header button[aria-label="منو"],
+html.light.revo-coach-route .revo-remote-root button[aria-label="بازگشت به بالای صفحه"] {
+  border-color: rgba(17, 19, 10, 0.1);
+  background: linear-gradient(145deg, #fff, #f4f5ed);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html.light.revo-student-route .revo-remote-root nav .revo-nav > button:not([aria-current="page"]):hover > span:first-child {
+    border-color: rgba(119, 115, 0, 0.4);
+    background: rgba(233, 228, 0, 0.13) !important;
+  }
+
+  html.light.revo-student-route .revo-remote-root nav .revo-nav > button:not([aria-current="page"]):hover svg.lucide {
+    color: #777300;
+    filter: none;
+  }
+}
+
+@media (max-width: 360px) {
+  html.revo-student-route .revo-remote-root nav .revo-nav > button > span:first-child {
+    width: 34px;
+    height: 34px;
+  }
+
+  html.revo-student-route .revo-remote-root nav .revo-nav > button svg.lucide {
+    width: 19px;
+    height: 19px;
+  }
+
+  html.revo-student-route .revo-remote-root nav .revo-nav > button > span:last-child {
+    font-size: 8.5px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:is(.revo-student-route, .revo-coach-route) .revo-remote-root svg.lucide,
+  html.revo-student-route .revo-remote-root nav .revo-nav > button,
+  html.revo-student-route .revo-remote-root nav .revo-nav > button > span:first-child,
+  html.revo-coach-route .revo-remote-root aside nav button,
+  html.revo-coach-route .revo-remote-root aside nav button > svg.lucide,
+  .neo-auth :is(.field, .spec-icon, .format-icon, .photo-badge, .coach-points, .btn) svg {
+    transition: none !important;
+    transform: none !important;
+  }
+}
